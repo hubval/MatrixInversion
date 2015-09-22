@@ -6,7 +6,8 @@
 
 
 ## makeCacheMatrix function creates a special "matrix" object that can cache 
-## its inverse.
+## its inverse. We'll use anonymous function here for the additionnal attributes
+## we want to add to our matrix.
 
 ## @Param : 'x' is a square invertible matrix
 ## Return a customized matrix
@@ -36,11 +37,13 @@ makeCacheMatrix <- function(x = matrix()) {
 ## Return a matrix that is the inverse of 'x'
 
 cacheSolve <- function(x, ...) {
+  # Search cache inverse
   m <- x$getinverse()
   if(!is.null(m)) {
     message("getting cached data")
     return(m)
   }
+  # If the inverse isn't in cache
   data <- x$get()
   m <- solve(data, ...)
   x$setinverse(m)
